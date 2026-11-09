@@ -1,0 +1,204 @@
+{
+ "maya-research/Veena": {
+  "gated": false,
+  "license": "apache-2.0",
+  "files": [
+   [
+    ".gitattributes",
+    1570
+   ],
+   [
+    "README.md",
+    12442
+   ],
+   [
+    "chat_template.jinja",
+    3827
+   ],
+   [
+    "config.json",
+    839
+   ],
+   [
+    "generation_config.json",
+    180
+   ],
+   [
+    "model-00001-of-00002.safetensors",
+    4991105552
+   ],
+   [
+    "model-00002-of-00002.safetensors",
+    2575032728
+   ],
+   [
+    "model.safetensors.index.json",
+    20977
+   ],
+   [
+    "special_tokens_map.json",
+    697
+   ],
+   [
+    "tokenizer.json",
+    22851621
+   ],
+   [
+    "tokenizer_config.json",
+    5405560
+   ]
+  ]
+ },
+ "kenpath/svara-tts-v1": {
+  "gated": false,
+  "license": "apache-2.0",
+  "files": [
+   [
+    ".gitattributes",
+    3412
+   ],
+   [
+    "README.md",
+    5675
+   ],
+   [
+    "chat_template.jinja",
+    3827
+   ],
+   [
+    "config.json",
+    899
+   ],
+   [
+    "examples/anger_english.wav",
+    118828
+   ],
+   [
+    "examples/chat_magahi.wav",
+    163884
+   ],
+   [
+    "examples/clear_telugu.wav",
+    213036
+   ],
+   [
+    "examples/fear_maithili.wav",
+    204844
+   ],
+   [
+    "examples/formal_kannada.wav",
+    253996
+   ],
+   [
+    "examples/happy_hindi.wav",
+    131116
+   ],
+   [
+    "examples/neutral_nepali.wav",
+    163884
+   ],
+   [
+    "examples/neutral_sanskrit.wav",
+    249900
+   ],
+   [
+    "examples/sad_malayalam.wav",
+    200748
+   ],
+   [
+    "examples/sad_marathi.wav",
+    270380
+   ],
+   [
+    "examples/surprise_punjabi.wav",
+    225324
+   ],
+   [
+    "examples/surprise_tamil.wav",
+    143404
+   ],
+   [
+    "model-00001-of-00003.safetensors",
+    4948557560
+   ],
+   [
+    "model-00002-of-00003.safetensors",
+    4932808960
+   ],
+   [
+    "model-00003-of-00003.safetensors",
+    3322130968
+   ],
+   [
+    "model.safetensors.index.json",
+    20920
+   ],
+   [
+    "special_tokens_map.json",
+    385
+   ],
+   [
+    "tokenizer.json",
+    22849546
+   ],
+   [
+    "tokenizer_config.json",
+    5407459
+   ]
+  ]
+ },
+ "ai4bharat/indic-parler-tts": {
+  "gated": "auto",
+  "license": "apache-2.0",
+  "files": [
+   [
+    ".gitattributes",
+    1519
+   ],
+   [
+    "README.md",
+    24886
+   ],
+   [
+    "config.json",
+    7338
+   ],
+   [
+    "generation_config.json",
+    223
+   ],
+   [
+    "model.safetensors",
+    3751321772
+   ],
+   [
+    "preprocessor_config.json",
+    206
+   ],
+   [
+    "special_tokens_map.json",
+    552
+   ],
+   [
+    "tokenizer.json",
+    10272460
+   ],
+   [
+    "tokenizer.model",
+    1795391
+   ],
+   [
+    "tokenizer_config.json",
+    990
+   ]
+  ],
+  "errors": [
+   "config.json: GatedRepoError: 401 Client Error. (Request ID: Root=1-6af1e2e3-6359a45e33a260df45d25f27;3761e667-db74-4f32-9e1a-800d35f25a67)\n\nCannot access gated repo for url https://huggingface.co/ai4bharat/indic-parler-tts/resolv",
+   "generation_config.json: GatedRepoError: 401 Client Error. (Request ID: Root=1-6af1e2e4-660872e723e0e68d5dd07610;47ea6b65-14d0-431e-bbd6-3763afdab46a)\n\nCannot access gated repo for url https://huggingface.co/ai4bharat/indic-parler-tts/resolv",
+   "preprocessor_config.json: GatedRepoError: 401 Client Error. (Request ID: Root=1-6af1e2e4-14cf9277426760bd714c3e2a;7885022d-ce9e-4c3d-962b-b908f17c4925)\n\nCannot access gated repo for url https://huggingface.co/ai4bharat/indic-parler-tts/resolv",
+   "special_tokens_map.json: GatedRepoError: 401 Client Error. (Request ID: Root=1-6af1e2e4-38dde38a70e699f53bcd782b;d11a76df-a34a-44f6-8215-923fa93f24d9)\n\nCannot access gated repo for url https://huggingface.co/ai4bharat/indic-parler-tts/resolv",
+   "tokenizer.model: GatedRepoError: 401 Client Error. (Request ID: Root=1-6af1e2e4-7d8fb8e7615edbb62d649373;139e29e4-1cc5-45a3-b787-06af0ba2c140)\n\nCannot access gated repo for url https://huggingface.co/ai4bharat/indic-parler-tts/resolv",
+   "tokenizer_config.json: GatedRepoError: 401 Client Error. (Request ID: Root=1-6af1e2e4-65ce7e8d75d94cd40ab9027b;651befce-f99b-4d54-b047-a7b289f24a0c)\n\nCannot access gated repo for url https://huggingface.co/ai4bharat/indic-parler-tts/resolv"
+  ]
+ }
+}
