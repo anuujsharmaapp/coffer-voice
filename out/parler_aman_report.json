@@ -1,0 +1,22 @@
+[
+ {
+  "file": "parler_aman_dev_d0.wav",
+  "secs": 48.5,
+  "audio_s": 5.98
+ },
+ {
+  "file": "parler_aman_dev_d1.wav",
+  "secs": 52.5,
+  "audio_s": 6.28
+ },
+ {
+  "file": "parler_aman_mix_d0.wav",
+  "secs": 51.4,
+  "audio_s": 6.46
+ },
+ {
+  "file": "parler_aman_mix_d1.wav",
+  "secs": 48.6,
+  "audio_s": 6.06
+ }
+]
