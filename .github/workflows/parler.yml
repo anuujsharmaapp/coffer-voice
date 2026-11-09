@@ -33,6 +33,8 @@ jobs:
         run: |
           pip install -q torch==2.5.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cpu
           pip install -q git+https://github.com/huggingface/parler-tts.git soundfile
+          pip install -q "sentencepiece==0.2.0"
+          python -c "from google.protobuf import __version__ as v; print('protobuf', v)"
           python -c "import torch, torchaudio; print('torch', torch.__version__, 'torchaudio', torchaudio.__version__)"
       - name: Check access to the gated model
         if: env.HF_TOKEN != ''
