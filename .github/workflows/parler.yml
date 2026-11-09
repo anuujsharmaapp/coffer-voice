@@ -1,0 +1,65 @@
+name: parler
+on:
+  push:
+    branches: [main]
+    paths: ['voice/parler_jobs.json', 'voice/gen_parler.py', '.github/workflows/parler.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: parler
+  cancel-in-progress: true
+jobs:
+  speak:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        speaker: [Rohit, Aman]
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - name: Token present?
+        run: if [ -z "$HF_TOKEN" ]; then echo "No HF_TOKEN secret yet - skipping (add it in Settings > Secrets > Actions)"; fi
+      - uses: actions/checkout@v4
+        if: env.HF_TOKEN != ''
+      - uses: actions/setup-python@v5
+        if: env.HF_TOKEN != ''
+        with:
+          python-version: '3.11'
+      - name: Install (CPU)
+        if: env.HF_TOKEN != ''
+        run: |
+          pip install -q torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -q git+https://github.com/huggingface/parler-tts.git soundfile
+      - name: Check access to the gated model
+        if: env.HF_TOKEN != ''
+        run: python -c "from huggingface_hub import HfApi; HfApi().model_info('ai4bharat/indic-parler-tts'); print('access OK')"
+      - name: Speak
+        if: env.HF_TOKEN != ''
+        run: python voice/gen_parler.py ${{ matrix.speaker }} out
+      - uses: actions/upload-artifact@v4
+        if: always() && env.HF_TOKEN != ''
+        with:
+          name: parler-${{ matrix.speaker }}
+          path: out/
+          if-no-files-found: warn
+  collect:
+    needs: speak
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: art
+      - name: Commit clips to branch voice-out-parler
+        run: |
+          mkdir -p out art && find art -type f -exec cp {} out/ \; ; ls -la out
+          if [ -z "$(ls -A out)" ]; then echo "no clips (token missing or run failed)"; exit 0; fi
+          git config user.name "coffer-voice-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B voice-out-parler
+          git add out && git commit -m "Parler clips from run ${{ github.run_id }}" || echo "nothing to commit"
+          git push -f origin voice-out-parler

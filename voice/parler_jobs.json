@@ -1,0 +1,11 @@
+{
+ "note": "Test 2 (9 Nov 2026): Episode 1 opening with Indic Parler-TTS Hindi speakers. dev = all Devanagari, mix = Hindi Devanagari + English words in Latin.",
+ "descriptions": [
+  "{name}'s voice is friendly, confident and conversational, slightly expressive, at a slightly fast pace. The recording is very clear and close up, with no background noise.",
+  "{name} speaks in an energetic and animated way, like a young man telling a friend exciting news, at a fast pace. The recording is very clear and close up, with no background noise."
+ ],
+ "lines": [
+  {"id": "dev", "text": "अगर मैं बोलूँ कि आप इंडिया से लंदन फ़्लाई कर सकते हो, सिर्फ़ ट्वेल्व थाउज़ंड पॉइंट्स में? हाँ, एग्ज़ैक्ट्ली।"},
+  {"id": "mix", "text": "अगर मैं बोलूँ कि आप India से London fly कर सकते हो, सिर्फ़ twelve thousand points में? हाँ, exactly."}
+ ]
+}
