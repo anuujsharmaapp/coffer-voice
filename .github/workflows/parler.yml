@@ -31,8 +31,9 @@ jobs:
       - name: Install (CPU)
         if: env.HF_TOKEN != ''
         run: |
-          pip install -q torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -q torch==2.5.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cpu
           pip install -q git+https://github.com/huggingface/parler-tts.git soundfile
+          python -c "import torch, torchaudio; print('torch', torch.__version__, 'torchaudio', torchaudio.__version__)"
       - name: Check access to the gated model
         if: env.HF_TOKEN != ''
         run: python -c "from huggingface_hub import HfApi; HfApi().model_info('ai4bharat/indic-parler-tts'); print('access OK')"
