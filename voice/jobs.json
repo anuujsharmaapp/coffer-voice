@@ -1,0 +1,7 @@
+{
+ "note": "Test 1 (9 Nov 2026): Episode 1 opening, Hindi in Devanagari + English words in Latin (Veena's own code-mixed style).",
+ "lines": [
+  {"id": "hook", "max_tokens": 900,
+   "text": "अगर मैं बोलूँ कि आप India से London fly कर सकते हो, सिर्फ़ twelve thousand points में? हाँ, exactly."}
+ ]
+}

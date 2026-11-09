@@ -1,0 +1,68 @@
+name: voice
+on:
+  push:
+    branches: [main]
+    paths: ['voice/jobs.json', 'voice/gen.py', '.github/workflows/voice.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: voice
+  cancel-in-progress: true
+jobs:
+  speak:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {model: veena, speaker: kavya}
+          - {model: veena, speaker: agastya}
+          - {model: veena, speaker: maitri}
+          - {model: veena, speaker: vinaya}
+          - {model: svara, speaker: "Hindi (Male)"}
+          - {model: svara, speaker: "Hindi (Female)"}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL /usr/local/share/boost || true
+          df -h / | tail -1; nproc; free -g | head -2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install (CPU)
+        run: |
+          pip install -q torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -q "transformers>=4.52,<5" accelerate snac soundfile numpy huggingface_hub hf_transfer
+      - name: Download model
+        env:
+          HF_HUB_ENABLE_HF_TRANSFER: '1'
+        run: |
+          python -c "from huggingface_hub import snapshot_download as s; r={'veena':'maya-research/Veena','svara':'kenpath/svara-tts-v1'}['${{ matrix.model }}']; s(r, allow_patterns=['*.json','*.safetensors','*.jinja','tokenizer*']); s('hubertsiuzdak/snac_24khz')"
+      - name: Speak
+        run: python voice/gen.py ${{ matrix.model }} "${{ matrix.speaker }}" out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: out-${{ strategy.job-index }}
+          path: out/
+          if-no-files-found: warn
+  collect:
+    needs: speak
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: art
+      - name: Commit clips to branch voice-out
+        run: |
+          mkdir -p out && find art -type f -exec cp {} out/ \; ; ls -la out
+          git config user.name "coffer-voice-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B voice-out
+          git add out && git commit -m "Voice clips from run ${{ github.run_id }}" || echo "nothing to commit"
+          git push -f origin voice-out
